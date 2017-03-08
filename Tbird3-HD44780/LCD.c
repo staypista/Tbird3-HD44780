@@ -10,8 +10,7 @@ void lcd_data(uint8_t data){
 	PORTF|=0x02;
 	PORTE=data&0xF0;
 	ENABLE
-	data=(data<<4);
-	PORTE=data&0xF0;
+	PORTE=(data<<4)&0xF0;
 	ENABLE
 }
 
@@ -20,8 +19,7 @@ void lcd_cmd(uint8_t cmd){
 	PORTF&=0xfd;
 	PORTE=cmd&0xF0;
 	ENABLE
-	cmd=(cmd<<4);
-	PORTE=cmd&0xF0;
+	PORTE=(cmd<<4)&0xF0;
 	ENABLE
 }
 
@@ -58,6 +56,7 @@ void lcd_str(char *string){
 		if(i==16) lcd_gotoxy(1,0);
 		if(i==32) lcd_gotoxy(2,0);
 		if(i==48) lcd_gotoxy(3,0);
+		if(i==0) lcd_gotoxy(0,0);
 	}	
 }
 
